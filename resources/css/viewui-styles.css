@@ -1956,7 +1956,6 @@ a{
     position: relative;
 }
 ._main_content{
-    padding: 25px;
     min-height: calc(100vh - 135px);
     position: relative;
 }

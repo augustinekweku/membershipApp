@@ -1,8 +1,16 @@
+
 .ivu-form-item-content{
     line-height: 16px !important;
 }
 .ivu-form .ivu-form-item-label{
     padding: 2px 12px 10px 0 !important;
+}
+
+.showPasswordIcon {
+    cursor: pointer;
+    margin-left: -25px;
+    z-index: 99;
+    background-color: #fff;
 }
 /*-----------------------
     1.Menu
@@ -1848,7 +1856,7 @@
     overflow: hidden;
 }
 ._1profile_banner_img{
-    height: 100%;
+    height: 300px;
     width: 100%;
     object-fit: cover;
 }
@@ -1861,6 +1869,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    padding-top: 15px;
 }
 ._1profile_banner_list li {
     display: inline-block;
@@ -1903,7 +1912,6 @@
 ._1profile_main{}
 ._1profile_left {
     margin-top: -249px;
-    width: 322px;
 }
 ._1profile_left_all {
     /* margin-top: -50px; */
@@ -2001,11 +2009,21 @@
 ._1card_comment_box_input_icon ._1card_comment_box_input{
     position: relative;
 }
-._1profile_right {
-    margin-top: -150px;
-    z-index: 6;
-    position: relative;
-}
+@media screen and (min-width: 480px) {
+    ._1profile_right {
+        margin-top: -249px !important;
+        z-index: 6;
+        position: relative;
+    }
+  }
+@media screen and (max-width: 480px) {
+    ._1profile_right {
+        margin-top: 0px !important;
+        z-index: 6;
+        position: relative;
+    }
+  }
+
 ._1profile_right_menu{}
 ._1profile_menu_list {
     display: flex;
@@ -2036,10 +2054,10 @@
     color: #fff;
 }
 ._1profile_menu_list li a {
-    background: #4f9ae81c;
+    background: #0000007e;
     display: block;
     text-align: center;
-    color: #99abb4;
+    color: white;
     padding: 17px 5px;
     border-radius: 5px;
     transition: .2s all ease;
@@ -3958,7 +3976,6 @@
         margin-left: 0;
     }
     ._main_content {
-        padding: 25px 15px;
         min-height: calc(100vh - 148px);
     }
     ._navbar_left_icon{
@@ -4082,7 +4099,6 @@
         margin-left: 0;
     }
     ._main_content {
-        padding: 25px;
         min-height: calc(100vh - 134px);
     }
     ._navbar_left_icon{
@@ -6136,7 +6152,6 @@ a{
     position: relative;
 }
 ._main_content{
-    padding: 25px;
     min-height: calc(100vh - 135px);
     position: relative;
 }

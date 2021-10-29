@@ -64,7 +64,7 @@
                                     <Icon type="ios-search-outline" />
                                 </li>
 
-                                <li class="_nav_pro d-none">
+                                <li class="_nav_pro">
                                     <Dropdown
                                         trigger="click"
                                         placement="bottom-end"
@@ -73,7 +73,7 @@
                                             <div class="_nav_pro_pic">
                                                 <img
                                                     class="_nav_pro_img"
-                                                    src="/static/img/photo.jpg"
+                                                    src="/images/profile-pic.png"
                                                     alt=""
                                                     title=""
                                                 />
@@ -99,12 +99,12 @@
                                                         <p
                                                             class="_nav_pro_top_name"
                                                         >
-                                                            Steave Jobs
+                                                            {{user.first_name}} {{user.last_name}} 
                                                         </p>
                                                         <p
                                                             class="_nav_pro_top_email"
                                                         >
-                                                            SteaveJobs@gmail.com
+                                                            {{user.email}}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -161,27 +161,7 @@
                                                 >
                                                     <ul class="_nav_pro_list">
                                                         <li>
-                                                            <a href="">
-                                                                <Icon
-                                                                    type="ios-cog"
-                                                                />
-                                                                <p
-                                                                    class="_nav_pro_list_text"
-                                                                >
-                                                                    Account
-                                                                    Setting
-                                                                </p>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-
-                                                <div
-                                                    class="_nav_pro_list_main _1border_color"
-                                                >
-                                                    <ul class="_nav_pro_list">
-                                                        <li>
-                                                            <a href="">
+                                                            <a href="/logout">
                                                                 <Icon
                                                                     type="ios-exit"
                                                                 />
@@ -244,6 +224,22 @@
             >
                 <div class="_left_sidebar_main">
                     <!-- PROFILE PIC WITH NAME AND ROLE -->
+                <div class="_left_sidebar_top">
+                    <div class="_mobile_logo">
+                    <a href="" class="_navbar_logo_link">
+                        <img src="/images/profile-pic.png" alt="" title="" class="_navbar_logo_img"> 
+                        <img src="/static/img/header.png" alt="" title="" class="_navbar_logo_img_text">
+                    </a>
+                    </div>
+
+                    <div class="_left_sidebar_top_main">
+                    <div class="_left_sidebar_pic">
+                        <img class="_left_sidebar_img" src="/images/profile-pic.png" alt="" title="">
+                    </div>
+                    </div>
+                    <p class="_left_sidebar_pro">Admin</p>
+                    <p class="_left_sidebar_name">{{user.first_name}}</p>
+                    </div>
 
                     <div class="_left_sidebar_menu _1scrollbar">
                         <Menu :theme="theme3" :active-name="activeRoute">
@@ -251,9 +247,9 @@
                                 <p class="_group_name">
                                     <Icon type="ios-more" />
                                 </p>
-                                <MenuItem to="/staff" name="2">
+                                <MenuItem to="/profile" name="2">
                                     <Icon type="md-people" />
-                                    <span class="submenu_text">Staff</span>
+                                    <span class="submenu_text">Profile</span>
                                 </MenuItem>
                                 <MenuItem
                                     to="/reportingTime"
@@ -339,6 +335,8 @@
 <script>
 
 export default {
+props: ['user'],
+
     components: {
 
     },
@@ -379,6 +377,8 @@ export default {
         }
     },
     created() {
+        this.$store.commit('setUpdateUser', this.user)
+        console.log("prop user", this.user);
         this.activeRoute = this.$route.name;
     }
 };

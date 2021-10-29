@@ -31,7 +31,6 @@
         margin-left: 0;
     }
     ._main_content {
-        padding: 25px 15px;
         min-height: calc(100vh - 148px);
     }
     ._navbar_left_icon{
@@ -155,7 +154,6 @@
         margin-left: 0;
     }
     ._main_content {
-        padding: 25px;
         min-height: calc(100vh - 134px);
     }
     ._navbar_left_icon{

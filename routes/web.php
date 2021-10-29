@@ -16,10 +16,11 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::prefix('app')->group(function(){
+    Route::post('login_user',[AuthController::class, 'loginUser']);
     Route::post('register_user',[AuthController::class, 'registerUser']);
 
 });
 
-
+Route::get('/logout',[AuthController::class, 'logout']);
 Route::get('/',[HomeController::class, 'index']);
 Route::any('{slug}', [HomeController::class, 'index'])->where('slug', '([A-z\d\-\/_.]+)?');

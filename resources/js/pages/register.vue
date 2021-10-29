@@ -5,15 +5,18 @@
                 <div
                     class="left-side d-flex justify-content-center align-items-center"
                 >
-                    <div>
-                        <h1 class="fs-1">
-                            Welcome to the NMSSG <br />
-                            Membership PlatForm
-                        </h1>
+                    <div class="overlay text-center">
+                        <h2 class="animate__animated animate__heartBeat animate__delay-1s">Welcome to the</h2>
+                        <h1 class="animate__animated animate__fadeIn animate__delay-2s fs-1">NMSSG Membership Platform</h1>
+                        <div  class="down-arrow text-center mt-5  d-md-none">
+                            <a href="#main-content" style="color:white !important;">
+                            <v-icon class="animate__animated animate__heartBeat animate__infinite" name="angle-double-down" scale="3"/> 
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div id="main-content" class="col-sm-6">
                 <Form v-if="!loginForm" class="animate__animated animate__fadeIn" ref="register_form" :model="register_form" :rules="ruleInline" inline>
                     <div
                         class="right-side d-flex justify-content-center align-items-center"
@@ -133,7 +136,7 @@
                             </Card>
                         </div>
                     </div>
-                </Form>                
+                </Form>           
                 <Form v-if="loginForm" class="animate__animated animate__fadeIn" ref="login_form" :model="login_form" :rules="loginFormRules" inline>
                     <div
                         class="right-side d-flex justify-content-center align-items-center"
@@ -179,7 +182,7 @@
                                         </div>
                                         <div class="footer-button d-flex justify-content-between">
                                             <div>
-                                            <Button type="primary" @click="register">Login</Button>
+                                            <Button :loading="isLoggingIn" :disabled="isLoggingIn" type="primary" @click="login">Login</Button>
                                             </div>
                                             <div>
                                                 <Button @click="showRegisterForm" type="dashed"><span class="fst-italic">Not A Member? Register!</span></Button>
@@ -200,6 +203,7 @@
 export default {
     data() {
         return {
+            isLoggingIn: false,
             isRegistering: false,
             loginForm: false,
             register_form: {
@@ -257,6 +261,39 @@ export default {
         showLoginForm(){
             this.loginForm = true
         },
+        async login(){
+            this.$refs['login_form'].validate( async valid => {
+                if (valid) {
+            this.isLoggingIn = true;
+            const res =  await this.callApi(
+                "post",
+                "app/login_user",
+                this.login_form
+            );
+            if (res.status === 200) {
+                this.isLoggingIn = false;
+                this.successMsg("Success");
+                window.location = '/'
+            } else {
+                if (res.status === 422) {
+                    this.isLoggingIn = false;
+                    for (let i in res.data.errors) {
+                        this.errorMsg(res.data.errors[i][0]);
+                    }
+                } else if (res.status === 500) {
+                    this.isLoggingIn = false;
+                    //alert(res.status)
+                    console.log(res.data);
+                    this.errorMsg(res.data.message);
+                } else {
+                    this.isLoggingIn = false;
+                    this.swrMsg();
+                }
+            }                    
+                }
+            } );
+            
+        },
         async register(){
             if (!this.register_form.phone) {
                 return this.errorMsg('Please Enter your phone number!')
@@ -274,14 +311,8 @@ export default {
             );
             if (res.status === 201) {
                 this.isRegistering = false;
-                this.successMsg("User added successfully");
-                this.register_form.first_name = "";
-                this.register_form.last_name = "";
-                this.register_form.email = "";
-                this.register_form.password = "";
-                this.register_form.password2 = "";
-                this.register_form.gender = "";
-                this.register_form.phone = "";
+                this.successMsg("Success");
+                window.location = '/'
             } else {
                 if (res.status === 422) {
                     this.isRegistering = false;
@@ -308,6 +339,10 @@ export default {
 };
 </script>
 <style scoped>
+.down-arrow{
+    position: relative;
+    color:white
+}
 .left-side {
     position: relative;
     background-image: url("/images/nmssg-photo.jpg");
@@ -315,7 +350,7 @@ export default {
     height: 100vh;
 }
 .left-side::before {
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.7);
     content: "";
     top: 0px;
     right: 0px;
@@ -323,12 +358,7 @@ export default {
     left: 0px;
     position: absolute;
 }
-.left-side h1,
-.left-side h2,
-.left-side h3,
-.left-side h4,
-.left-side h5,
-.left-side h6 {
+.overlay{
     color: white;
     position: relative;
 }

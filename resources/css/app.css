@@ -1,6 +1,14 @@
+
 .ivu-form-item-content{
     line-height: 16px !important;
 }
 .ivu-form .ivu-form-item-label{
     padding: 2px 12px 10px 0 !important;
+}
+
+.showPasswordIcon {
+    cursor: pointer;
+    margin-left: -25px;
+    z-index: 99;
+    background-color: #fff;
 }

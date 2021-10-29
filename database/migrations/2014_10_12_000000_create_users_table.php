@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('gender');
+            $table->string('date_of_birth')->nullable();
             $table->string('region')->nullable();
             $table->string('phone');
             $table->string('city')->nullable();
@@ -25,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->boolean('isActivated')->default(0);
             $table->unsignedBigInteger('role_id')->nullable();
             $table->string('department')->nullable();
+            $table->string('facility_name')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

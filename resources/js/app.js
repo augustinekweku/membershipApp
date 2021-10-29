@@ -21,6 +21,10 @@ Vue.mixin(common);
 import animateCss from 'animate.css';
 Vue.use(animateCss);
 
+import 'vue-awesome/icons'
+import Icon from 'vue-awesome/components/Icon'
+Vue.component('v-icon', Icon)
+
 Vue.component('mainapp', require('./components/mainapp.vue').default); 
 
 const app = new Vue({
