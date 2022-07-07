@@ -71,7 +71,6 @@
                                                                         <li @click="selectTab('basic-info')" :class="(tab == 'basic-info') ? '_active' : ''">Contact and Basic info</li>
                                                                         <li @click="selectTab('work')"  :class="(tab == 'work') ? '_active' : ''">Work and Education</li>
                                                                         <li @click="selectTab('places')" :class="(tab == 'places') ? '_active' : ''">Places You've Lived</li>
-                                                                        <li @click="selectTab('contact')"  :class="(tab == 'contact') ? '_active' : ''">Contact and Basic Info </li>
                                                                     </ul>
                                                                 </div>
                                                                 <div class="_about_details">
@@ -122,6 +121,7 @@ import Banner from '../components/profile/banner.vue'
 import ProfileCard from '../components/profile/ProfileCard.vue'
 import Work from '../components/profile/profile-about/work.vue'
 import BasicInfo from '../components/profile/profile-about/basic-info.vue'
+import Places from '../components/profile/profile-about/places.vue'
 
 export default {
     props:['user'],
@@ -130,6 +130,7 @@ export default {
         ProfileCard,
         Work,
         BasicInfo,
+        Places,
     },
 
     data(){

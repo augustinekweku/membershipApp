@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,7 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::prefix('app')->group(function(){
+    Route::post('edit_basic_info',[ProfileController::class, 'editBasicInfo']);
     Route::post('login_user',[AuthController::class, 'loginUser']);
     Route::post('register_user',[AuthController::class, 'registerUser']);
 

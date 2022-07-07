@@ -1,6 +1,14 @@
 <template>
     <div>
-        <h6>Work and Education</h6>
+        <div class="_flex_row justify-content-between align-items-center _mar_b20">
+            <p class="_3title">Work and Education</p>
+
+            <div class>
+                <button @click="setReadOnlyField" class="_3btn _pre_icon _btn_sm" type="button">
+                    <i class="fas fa-pen"></i> Edit
+                </button>
+            </div>
+        </div>
         <Form>
         <FormItem label="Department">
             <Input  placeholder=""></Input>

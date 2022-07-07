@@ -46,7 +46,7 @@
         </FormItem>
 
                 </div>
-        <div class="submit-button"> <Button type="primary">Save</Button></div>
+        <div class="submit-button"> <Button @click="editBasicInfo" type="primary">Save</Button></div>
 
             </div>
         </Form>
@@ -98,10 +98,31 @@ export default {
         setReadOnlyField(){
             this.setReadOnly = this.setReadOnly ? this.setReadOnly=false : this.setReadOnly=true
         },
-        editBasicInfo() {
-            this.$refs['login_form'].validate( async valid => {
+        async editBasicInfo() {
+            this.$refs['userForm'].validate( async valid => {
                 if (valid) {
-
+                const res =  await this.callApi(
+                "post",
+                "app/edit_basic_info",
+                this.userForm
+            );
+            if (res.status === 200) {
+                this.successMsg("Profile updated successfully");
+            }} else {
+                if (res.status === 422) {
+                    this.isLoggingIn = false;
+                    for (let i in res.data.errors) {
+                        this.errorMsg(res.data.errors[i][0]);
+                    }
+                } else if (res.status === 500) {
+                    this.isLoggingIn = false;
+                    //alert(res.status)
+                    console.log(res.data);
+                    this.errorMsg(res.data.message);
+                } else {
+                    this.isLoggingIn = false;
+                    this.swrMsg();
+                }
                 }
             })
 
@@ -110,6 +131,7 @@ export default {
     created() {
         let store_user = this.$store.state.user
         let userObj = {
+            id: store_user.id,
             first_name : store_user.first_name,
             last_name : store_user.last_name,
             email : store_user.email,

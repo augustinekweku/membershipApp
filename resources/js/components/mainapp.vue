@@ -115,7 +115,7 @@
                                                     <ul class="_nav_pro_list">
                                                         <li>
                                                             <router-link
-                                                                to="/profile"
+                                                                to="/profile-about"
                                                             >
                                                                 <Icon
                                                                     type="md-person"
@@ -247,8 +247,8 @@
                                 <p class="_group_name">
                                     <Icon type="ios-more" />
                                 </p>
-                                <MenuItem to="/profile" name="2">
-                                    <Icon type="md-people" />
+                                <MenuItem to="/profile-about" name="2">
+                                    <Icon type="md-person" />
                                     <span class="submenu_text">Profile</span>
                                 </MenuItem>
                                 <MenuItem
